@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:map_test_task/di/di.dart';
 import 'package:map_test_task/presentation/main_page.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
