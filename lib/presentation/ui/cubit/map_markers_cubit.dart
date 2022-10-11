@@ -6,7 +6,7 @@ import 'package:map_test_task/data/repository/map_objects_repository.dart';
 
 part 'map_markers_state.dart';
 
-@injectable
+@singleton
 class MapMarkersCubit extends Cubit<MapMarkersState> {
   MapMarkersCubit(
     this._mapMarkersRepository,

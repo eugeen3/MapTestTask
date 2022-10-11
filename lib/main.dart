@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_test_task/core/di/injection.dart';
+import 'package:map_test_task/presentation/ui/cubit/map_markers_cubit.dart';
 import 'package:map_test_task/presentation/ui/main_page.dart';
 
 void main() {
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
           900: Color.fromRGBO(255, 193, 55, 1),
         }),
       ),
-      home: const MainPage(title: 'Allsports Map'),
+      home: BlocProvider.value(
+        value: getIt<MapMarkersCubit>(),
+        child: const MainPage(title: 'Allsports Map'),
+      ),
     );
   }
 }
