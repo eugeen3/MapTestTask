@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:graphql/client.dart';
 import 'package:injectable/injectable.dart';
-import 'package:map_test_task/data/graphql_client.dart';
 import 'package:map_test_task/data/model/marker.dart';
 
 @singleton
 class MapMarkersRepository {
-  final GraphQLClient client = GraphQLClientProvider().getClient();
+  MapMarkersRepository(this.client);
 
-  Future<List<Marker>> getMarkers() async {
+  final GraphQLClient client;
+
+  Future<List<MarkerModel>> getMarkers() async {
     final QueryOptions options = QueryOptions(
       document: gql(
         r'''
@@ -44,10 +45,10 @@ class MapMarkersRepository {
 
     final List<dynamic> markersJson =
         result.data?['map_markers'] as List<dynamic>;
-    final List<Marker> markers = [];
+    final List<MarkerModel> markers = [];
     for (var f in markersJson) {
       {
-        markers.add(Marker.fromJson(f));
+        markers.add(MarkerModel.fromJson(f));
       }
     }
 

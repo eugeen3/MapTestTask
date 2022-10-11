@@ -1,33 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
-import 'package:map_test_task/data/models/supplier.dart';
+import 'package:map_test_task/data/model/supplier.dart';
 
-class Marker {
-  Marker({
+class MarkerModel {
+  MarkerModel({
     required this.lat,
     required this.lng,
     required this.suppliers,
   });
 
-  factory Marker.fromJson(dynamic response) {
-    return Marker(
+  factory MarkerModel.fromJson(dynamic response) {
+    return MarkerModel(
       lat: response['lat'],
       lng: response['lng'],
       suppliers: (response['suppliers'] as List<dynamic>)
-          .map((supplier) => Supplier.fromJson(supplier))
+          .map((supplier) => SupplierModel.fromJson(supplier))
           .toList(),
     );
   }
 
   double lat;
   double lng;
-  List<Supplier> suppliers;
+  List<SupplierModel> suppliers;
 
   @override
   String toString() => 'Marker(lat: $lat, lng: $lng, suppliers: $suppliers)';
 
   @override
-  bool operator ==(covariant Marker other) {
+  bool operator ==(covariant MarkerModel other) {
     if (identical(this, other)) return true;
 
     return other.lat == lat &&

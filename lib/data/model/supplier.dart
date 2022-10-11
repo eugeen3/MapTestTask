@@ -1,11 +1,11 @@
-class Supplier {
-  Supplier({
+class SupplierModel {
+  SupplierModel({
     required this.id,
     required this.name,
   });
 
-  factory Supplier.fromJson(dynamic response) {
-    return Supplier(
+  factory SupplierModel.fromJson(dynamic response) {
+    return SupplierModel(
       id: response['id'],
       name: response['name'],
     );
@@ -18,7 +18,7 @@ class Supplier {
   String toString() => 'Supplier(id: $id, name: $name)';
 
   @override
-  bool operator ==(covariant Supplier other) {
+  bool operator ==(covariant SupplierModel other) {
     if (identical(this, other)) return true;
 
     return other.id == id && other.name == name;
