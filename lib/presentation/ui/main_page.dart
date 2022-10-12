@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:map_test_task/data/model/marker.dart';
 import 'package:map_test_task/presentation/ui/cubit/map_markers_cubit.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,7 +14,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<MarkerModel> markers = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +21,13 @@ class _MainPageState extends State<MainPage> {
         title: Text(widget.title),
       ),
       body: BlocBuilder<MapMarkersCubit, MapMarkersState>(
-        buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
-          print(state);
           return FlutterMap(
             options: MapOptions(
               center: LatLng(53.90522, 27.55386),
               zoom: 13,
               interactiveFlags: ~InteractiveFlag.rotate,
+              onMapReady: () => context.read<MapMarkersCubit>().updateMarkers(),
             ),
             children: [
               TileLayer(
@@ -39,12 +36,6 @@ class _MainPageState extends State<MainPage> {
               ),
               MarkerLayer(
                 markers: [
-                  Marker(
-                    point: LatLng(53.95, 27.6),
-                    width: 30,
-                    height: 30,
-                    builder: (context) => const FlutterLogo(),
-                  ),
                   ...state.markers
                       .map((model) => Marker(
                             point: LatLng(model.lat, model.lng),
@@ -55,11 +46,6 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<MapMarkersCubit>().updateMarkers();
         },
       ),
     );

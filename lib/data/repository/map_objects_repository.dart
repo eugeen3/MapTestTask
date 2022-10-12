@@ -23,11 +23,11 @@ class MapMarkersRepository {
             activity:[],
             tag:[]}, 
     leftTopPoint: { 
-        lat: 53.90921759901524, 
-        lng: 27.537789344787598}, 
+        lat: 53.96941513194737, 
+        lng: 27.41899815788326}, 
     centerPoint:{
-        lat: 53.906044719797165, 
-        lng: 27.55598545074463}) 
+        lat: 53.90440700905252, 
+        lng: 27.5541348391629}) 
         { 
             lat lng suppliers { id name } 
         }
@@ -35,7 +35,6 @@ class MapMarkersRepository {
       ''',
       ),
     );
-
     final QueryResult result = await client.query(options);
 
     if (result.hasException) {
